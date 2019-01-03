@@ -53,6 +53,9 @@ class UI {
 }
 
 // Store Class: Handles Storage
+// local storege stores key-value pares
+// we will have an item called books which is going to be a string version of array
+// objects can not be stored in local storage
 class Store {
     static getBooks() {
       let books;
@@ -67,19 +70,22 @@ class Store {
   
     static addBook(book) {
       const books = Store.getBooks();
+      //push = adds a new element to an array
       books.push(book);
+    //before an objec is added it needs to be stringify
       localStorage.setItem('books', JSON.stringify(books));
     }
   
     static removeBook(isbn) {
       const books = Store.getBooks();
-  
+
       books.forEach((book, index) => {
-        if(book.isbn === isbn) {
+        if(book.isbn.trim() === isbn.trim()) {
           books.splice(index, 1);
         }
       });
-  
+
+      console.log(books);
       localStorage.setItem('books', JSON.stringify(books));
     }
   }
